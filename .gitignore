@@ -1,0 +1,10 @@
+# Secrets
+.env
+
+# Runtime Data
+data/
+letsencrypt/
+
+# System
+thumbs.db
+desktop.ini
