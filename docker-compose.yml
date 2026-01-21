@@ -7,6 +7,8 @@ services:
       EULA: "TRUE"
       TYPE: "FABRIC"
       VERSION: "1.21.1"
+      FABRIC_LOADER_VERSION: "0.16.10"
+      FABRIC_INSTALLER_VERSION: "1.0.1"
       ONLINE_MODE: "false"
       MEMORY: "4096M"
       MOTD: "Minecraft server for Container Intro"

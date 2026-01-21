@@ -44,7 +44,7 @@
 - **Componenti:** Certificati, Chiavi, CA, CSR
 - **Pratica:**
   - Generare self-signed cert (OpenSSL)
-  - Configurare HTTPS su NGINX (8443)
+  - Configurare HTTPS su Traefik (8443)
   - Test `curl -k`
 
 ---
