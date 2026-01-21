@@ -1,41 +1,45 @@
-## Modulo 2: Networking, Web server, TLS (4h)
+## Modulo 2: Containers, Networking, Web server, TLS (4h)
+
+### Docker intro (30’)
+
+- **Concetti:** Container, Image, Volume, Network
+- **Tools:** `docker run`, `docker exec`, `docker ps`, `docker images`
+- **Esercizio:** 
+  - docker run hello-world
 
 ---
 
-### Networking Fundamentals (60’)
+### Docker compose intro (30’)
+
+- **Concetti:** Compose, Network, Volume
+- **Tools:** `docker compose up`, `docker compose down`, `docker compose ps`, `docker compose logs`
+- **Esercizio:** 
+  - Creare container con volume
+  - Montare volume
+  - Analisi log
+
+---
+
+### Networking Fundamentals (30’)
 
 - **Concetti:** IP, subnet, gateway, DNS, `/etc/hosts`
 - **Tools:** `ping`, `traceroute`, `nslookup/dig`, `ss/netstat`
-- **Sicurezza:** Firewall `ufw`, porte TCP/UDP
-- **Esercizio:** Configurare NIC Host-only e firewall
+- **Sicurezza:** Firewall, WAF, porte TCP/UDP
+- **Esercizio:** Configurare Network tra container
 
 ---
 
-### NGINX e Caddy (30’)
+### Traefik e NGINX (30’)
 
 - **Ruoli:** Static server vs Reverse proxy
 - **Esercizio:** 
-  - Installare NGINX
+  - Usare Traefik come reverse proxy
   - Servire pagina statica
   - Analisi log access/error
 
 ---
 
-### Gunicorn e Uvicorn (30’)
-
-- **Concetti:** Web Server vs App Server
-- **Protocolli:** WSGI (Sync) vs ASGI (Async)
-- **Gunicorn:**
-  - WSGI (Flask/Django)
-  - Worker & Forking
-- **Uvicorn:**
-  - ASGI (FastAPI)
-  - Performance async
-- **Esercizio:** Eseguire app con Gunicorn/Uvicorn
-
----
-
-### SSL/TLS Basics (40’)
+### SSL/TLS Basics (30’)
 
 - **Componenti:** Certificati, Chiavi, CA, CSR
 - **Pratica:**
@@ -45,7 +49,7 @@
 
 ---
 
-### JSON, YAML, JSONPath (40’)
+### JSON, YAML, JSONPath (20’)
 
 - **Formati:** Sintassi e differenze
 - **Tools:** `jq`, `yq`

@@ -30,7 +30,7 @@ services:
       ENFORCE_SECURE_PROFILE: "false"
       ALLOW_FLIGHT: "true"
     volumes:
-      - "./data:/data"
+      - "mc-data:/data"
 
     networks:
       - traefik-net
@@ -43,7 +43,14 @@ services:
       - "traefik.http.routers.mc-web.entrypoints=websecure"
       - "traefik.http.routers.mc-web.rule=Host(`containermonmap.duckdns.org`)"
       - "traefik.http.routers.mc-web.tls=true"
-      - "traefik.http.routers.mc-web.tls.certresolver=myresolver"
+      - "traefik.http.routers.mc-web.tls.certresolver=duckdns"
+      - "traefik.http.routers.mc-web-local.entrypoints=websecure"
+      - "traefik.http.routers.mc-web-local.rule=Host(`localhost`)"
+      - "traefik.http.routers.mc-web-local.tls=true"
+      - "traefik.http.routers.mc-web-local.service=mc-web"
+      - "traefik.http.routers.mc-web-http.entrypoints=web"
+      - "traefik.http.routers.mc-web-http.rule=Host(`containermonmap.duckdns.org`) || Host(`localhost`)"
+      - "traefik.http.routers.mc-web-http.service=mc-web"
       - "traefik.http.services.mc-web.loadbalancer.server.port=8123"
 
   # 2. IL REVERSE PROXY (Traefik)
@@ -55,17 +62,27 @@ services:
       - "--providers.docker=true"
       - "--entrypoints.minecraft.address=:25565"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
       - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.dnschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=duckdns"
-      - "--certificatesresolvers.myresolver.acme.email=${ACME_EMAIL}"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--entrypoints.websecure.asDefault=true"
+      - "--serversTransport.insecureSkipVerify=true" #Comment out once working
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker.exposedByDefault=false"
+      - "--certificatesresolvers.duckdns.acme.email=${ACME_EMAIL}"
+      - "--certificatesresolvers.duckdns.acme.storage=/letsencrypt/acme.json" #sudo touch acme.json && sudo chmod 600 acme.json
+      - "--certificatesresolvers.duckdns.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory" #Staging to avoid rate limiting, comment out for production
+      - "--certificatesresolvers.duckdns.acme.dnschallenge.disablepropagationcheck=true"
+      - "--certificatesresolvers.duckdns.acme.dnschallenge.provider=duckdns"
+      - "--certificatesresolvers.duckdns.acme.dnschallenge.delaybeforecheck=600"
+      - "--certificatesresolvers.duckdns.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53"
     environment:
       - DUCKDNS_TOKEN=${DUCKDNS_TOKEN}
     ports:
       - "25565:25565"
       - "80:80"
       - "443:443"
+      - "8080:8080"
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -84,3 +101,6 @@ services:
 networks:
   traefik-net:
     driver: bridge
+
+volumes:
+  mc-data:

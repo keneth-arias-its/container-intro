@@ -5,13 +5,11 @@ services:
     stdin_open: true
     environment:
       EULA: "TRUE"
-      TYPE: "MODRINTH"
+      TYPE: "FABRIC"
       VERSION: "1.21.1"
       ONLINE_MODE: "false"
-      MODRINTH_MODPACK: "5FFgwNNP" # CobbleMon
-      MODRINTH_VERSION: "1.7.1"
-      MEMORY: "8192M"
-      MOTD: "CobbleMon server for Container Intro"
+      MEMORY: "4096M"
+      MOTD: "Minecraft server for Container Intro"
       ICON: "https://cdn.modrinth.com/data/5FFgwNNP/e7f9ee2e9d361623847853fe2ddce42f519ee64f.png"
       USE_AIKAR_FLAGS: "true"
       USE_MEOWICE_FLAGS: "true"
@@ -25,11 +23,15 @@ services:
       ENABLE_WHITELIST: "false"
       MODRINTH_PROJECTS: |-
         fRQREgAc:cQ5fH43X # Dynmap 3.7-beta-8 for Fabric v1.21.1
+        P7dR8mSH:m6zu1K31 # Fabric API
       MODRINTH_DOWNLOAD_DEPENDENCIES: "required"
       ENFORCE_SECURE_PROFILE: "false"
       ALLOW_FLIGHT: "true"
     volumes:
-      - "./data:/data"
+      - "data:/data"
     ports:
       - "25565:25565"
       - "8123:8123"
+
+volumes:
+  data:
