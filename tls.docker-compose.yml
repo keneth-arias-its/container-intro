@@ -41,7 +41,7 @@ services:
       - "traefik.tcp.routers.mc-tcp.rule=HostSNI(`*`)"
       - "traefik.tcp.services.mc-tcp.loadbalancer.server.port=25565"
       - "traefik.http.routers.mc-web.entrypoints=websecure"
-      - "traefik.http.routers.mc-web.rule=Host(`containermonmap.duckdns.org`)"
+      - "traefik.http.routers.mc-web.rule=Host(`containermon.duckdns.org`)"
       - "traefik.http.routers.mc-web.tls=true"
       - "traefik.http.routers.mc-web.tls.certresolver=duckdns"
       - "traefik.http.routers.mc-web-local.entrypoints=websecure"
@@ -49,7 +49,7 @@ services:
       - "traefik.http.routers.mc-web-local.tls=true"
       - "traefik.http.routers.mc-web-local.service=mc-web"
       - "traefik.http.routers.mc-web-http.entrypoints=web"
-      - "traefik.http.routers.mc-web-http.rule=Host(`containermonmap.duckdns.org`) || Host(`localhost`)"
+      - "traefik.http.routers.mc-web-http.rule=Host(`containermon.duckdns.org`) || Host(`localhost`)"
       - "traefik.http.routers.mc-web-http.service=mc-web"
       - "traefik.http.services.mc-web.loadbalancer.server.port=8123"
 
@@ -93,7 +93,7 @@ services:
   #   image: lscr.io/linuxserver/duckdns:version-72c8259f
   #   container_name: duckdns
   #   environment:
-  #     - SUBDOMAINS=containermon,containermonmap
+  #     - SUBDOMAINS=containermon,containermon
   #     - TOKEN=${DUCKDNS_TOKEN}
   #     - LOG_FILE=false
   #   restart: unless-stopped
