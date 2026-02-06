@@ -24,7 +24,7 @@ Assicurati di avere installato:
 Clona il repository (se non l'hai già fatto):
 
 ```powershell
-git clone https://github.com/keneth-arias-its/container-intro.git
+git clone <URL_DEL_TUO_REPOSITORY>
 cd container-intro
 
 ```
@@ -95,7 +95,7 @@ Ecco come si vede l'ambiente funzionante:
 ### Minecraft Server Status
 ![Server Status](screenshots/MC.png)
 
-Carica 2 screenshot simili a quelli mostrati in questo repository.
+Carica su questa repository 2 screenshot simili a quelli mostrati sopra.
 
 ## 6. Spegnimento
 
