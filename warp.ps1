@@ -21,6 +21,5 @@ if ($MachinePath -notlike "*$WarpDir*") {
 
 # Connect
 Write-Host "Connecting..."
-& "$WarpDir\warp-cli.exe" registration new *>$null
-& "$WarpDir\warp-cli.exe" connect
+& "$WarpDir\Cloudflare WARP.exe"
 Write-Host "WARP Enabled"
